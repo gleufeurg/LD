@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d6bc3940c5b0943abbecd98375262e, type: 3}
+  m_Name: AquaData
+  m_EditorClassIdentifier: 
+  towerName: Aqua tower
+  upgradeCost: 110
+  price: 70
+  dmg: 30
+  attkSpeed: 1.2
+  elementType1: Water
+  elementType2: 
+  range: {x: 50, y: 50}
+  towerModel: {fileID: 1223363547116307214, guid: 3ddea2e71f3b8964fb5cde01af47f308, type: 3}
