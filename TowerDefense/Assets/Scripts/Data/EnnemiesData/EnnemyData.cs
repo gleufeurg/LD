@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnnemyData : ScriptableObject
 {
     public string ennemyName;
-    public int Health;
-    public float speed;
-    public int moneyDrop;
+    [Range(0,1000)] public int Health;
+    [Range(0,1000)] public float speed;
+    [Range(0,1000)] public int moneyDrop;
     public GameObject ennemyModel;
 }
