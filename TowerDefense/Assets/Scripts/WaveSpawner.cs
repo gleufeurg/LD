@@ -7,7 +7,7 @@ public class WaveSpawner : MonoBehaviour
     [Space(25f)]
     [Header("Stats")]
 
-    [SerializeField] [Range(0, 5)]    private float delayBetweenEnemies = 1f;
+    [SerializeField] [Range(0, 5)]     private float delayBetweenEnemies = 1f;
     [SerializeField] [Range(0,100)]    private float timeBetweenWaves = 5f;
     [SerializeField] [Range(0,10)]     private float countDown = 2f;
     [SerializeField] [Range(0,1000)]   private int waveIndex = 0;
@@ -32,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
             countDown = timeBetweenWaves;
         }
         countDown -= Time.deltaTime;
-        waveCountdownTimer.text = Mathf.Floor(countDown).ToString();
+        waveCountdownTimer.text = countDown.ToString("une nouvelle vague arrive dans : " + Mathf.Round(countDown));
     }
 
     //Begin a new wave

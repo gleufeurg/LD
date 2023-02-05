@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1289807442}
   m_Layer: 0
   m_Name: Enemy TEST
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c16418baa22fa746a487c451c449fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 20
   targetReachedDist: 0.3
   target: {fileID: 0}
   waypointIndex: 0
