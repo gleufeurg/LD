@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c16418baa22fa746a487c451c449fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 4.8
   targetReachedDist: 0.3
   target: {fileID: 0}
   waypointIndex: 0

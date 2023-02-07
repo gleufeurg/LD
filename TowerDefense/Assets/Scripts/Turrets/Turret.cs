@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,15 @@ public class Turret : MonoBehaviour
     [Header("References")]
 
     public Transform partToRotate;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
 
     [Space(25f)]
     [Header("Stats")]
 
     [SerializeField] [Range (0, 100)] private float turnSpeed = 10f;
+    [SerializeField] [Range (0, 300)] private float fireCountDown = 0f;
+    [Range(0, 100)] public float fireRate = 1f;
     public float range = 15f;
 
     [Space(25f)]
@@ -40,6 +45,25 @@ public class Turret : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         //Debug.Log("rotation = " + rotation);
+
+        if (fireCountDown <= 0)
+        {
+            Shoot();
+            fireCountDown = 1 / fireRate;
+        }
+        fireCountDown -= Time.deltaTime;
+    }
+
+    private void Shoot()
+    {
+        //Debug.Log("Piouuu !!");
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.Seek(target);
+        }
     }
 
     private void UpdateTarget()
