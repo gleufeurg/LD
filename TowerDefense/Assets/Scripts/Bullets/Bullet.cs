@@ -7,8 +7,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Range(0, 100)] public float Speed = 50f;
-    private Transform target;
+
+    [Space(25f)]
+    [Header("References")]
+
     public GameObject bulletimpactEffect;
+    private Transform target;
 
     public void Seek(Transform _target)
     {
