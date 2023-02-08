@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
     [SerializeField] [Range (0, 100)] private float turnSpeed = 10f;
     [SerializeField] [Range (0, 300)] private float fireCountDown = 0f;
     [Range(0, 100)] public float fireRate = 1f;
-    public float range = 15f;
+    [Range(0, 300)] public float range = 15f;
 
     [Space(25f)]
     [Header("Others")]

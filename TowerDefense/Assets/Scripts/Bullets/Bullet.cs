@@ -1,12 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [Space(25f)]
+    [Header("Stats")]
+
     [Range(0, 100)] public float Speed = 50f;
+    [Range(0, 100)] public float explosionRadius = 0f;
 
     [Space(25f)]
     [Header("References")]
@@ -36,6 +37,7 @@ public class Bullet : MonoBehaviour
             return;
         }
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
     }
 
     private void HitTarget()
@@ -43,6 +45,37 @@ public class Bullet : MonoBehaviour
         //Debug.Log("Touché");
         GameObject effectins = Instantiate(bulletimpactEffect, transform.position, transform.rotation);
         Destroy(effectins, 2f);
-        Destroy(gameObject);
+
+        if(explosionRadius > 0f)
+        {
+            Explode();
+        }
+        else
+        {
+            Damage(target);
+        }
+
+        Destroy(target.gameObject);
+    }
+
+    private void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if(collider.tag == "Enemy")
+                Damage(collider.transform);
+        }
+    }
+
+    private void Damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
