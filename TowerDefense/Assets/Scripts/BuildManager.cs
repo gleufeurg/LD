@@ -22,7 +22,7 @@ public class BuildManager : MonoBehaviour
     [Space(25f)]
     [Header("References")]
 
-    private TurretBP turretToBuild;
+    public TurretBP turretToBuild;
     public GameObject standardTurretPrefab;
     public GameObject rocketLauncherPrefab;
     public bool canBuild { get { return turretToBuild != null; } }

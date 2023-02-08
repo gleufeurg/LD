@@ -11,15 +11,12 @@ public class Node : MonoBehaviour
     private BuildManager buildManager;
 
     [Space(25f)]
-    [Header("Stats")]
-
-    public Vector3 positionOffset;
-
-    [Space(25f)]
-    [Header("Stats")]
+    [Header("Others")]
 
     public Color hoverColor;
     private Color startColor;
+    [SerializeField] private Color cannotBuild;
+    public Vector3 positionOffset;
 
 
     private void Start()
@@ -59,6 +56,13 @@ public class Node : MonoBehaviour
         //Quand la souris est sur un élément d'UI, ne construit rien sur la Node en dessous
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
+        // si pas asser d'argent on affiche la NODE en ROUGE (couleur choisie dans la prefabs NODE)
+        if (PlayerStats.money < buildManager.turretToBuild.cost || turret != null)
+        {
+            rend.material.color = cannotBuild;
+            return;
+        }
 
         //Highlight la color où la souris se situe
         rend.material.color = hoverColor;
