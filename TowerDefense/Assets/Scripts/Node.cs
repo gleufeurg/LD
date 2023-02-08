@@ -13,10 +13,10 @@ public class Node : MonoBehaviour
     [Space(25f)]
     [Header("Others")]
 
+    public Vector3 positionOffset;
     public Color hoverColor;
     private Color startColor;
-    [SerializeField] private Color cannotBuild;
-    public Vector3 positionOffset;
+    [SerializeField] private Color cannotBuildColor;
 
 
     private void Start()
@@ -58,9 +58,9 @@ public class Node : MonoBehaviour
             return;
 
         // si pas asser d'argent on affiche la NODE en ROUGE (couleur choisie dans la prefabs NODE)
-        if (PlayerStats.money < buildManager.turretToBuild.cost || turret != null)
+        if (!buildManager.hasMoney || turret != null)
         {
-            rend.material.color = cannotBuild;
+            rend.material.color = cannotBuildColor;
             return;
         }
 

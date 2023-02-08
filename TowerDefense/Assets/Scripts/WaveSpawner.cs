@@ -32,7 +32,8 @@ public class WaveSpawner : MonoBehaviour
             countDown = timeBetweenWaves;
         }
         countDown -= Time.deltaTime;
-        waveCountdownTimer.text = countDown.ToString("une nouvelle vague arrive dans : " + Mathf.Round(countDown));
+        countDown = Mathf.Clamp(countDown, 0f, Mathf.Infinity);
+        waveCountdownTimer.text = string.Format(/*"une nouvelle vague arrive dans : " +*/ "{0:00.00}", countDown);
     }
 
     //Begin a new wave
