@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -25,6 +23,10 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Transform target;
     public string enemyTag = "Enemy";
+    public bool useLaser;
+    public LineRenderer lineRenderer;
+    public ParticleSystem impactEffect;
+    public Light impactLight;
 
 
     private void Start()
@@ -36,22 +38,57 @@ public class Turret : MonoBehaviour
     {
         if (target == null)
         {
+            if (useLaser && lineRenderer.enabled)
+            {
+                lineRenderer.enabled = false;
+                impactLight.enabled = false;
+                impactEffect.Stop();
+            }
             //Debug.Log("target = " + target);
             return;
         }
 
+        lockOnTarget();
+
+        if (useLaser)
+        {
+            Laser();
+        }
+        else
+        {
+            if (fireCountDown <= 0)
+            {
+                Shoot();
+                fireCountDown = 1 / fireRate;
+            }
+            fireCountDown -= Time.deltaTime;
+        }
+    }
+
+    private void lockOnTarget()
+    {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         //Debug.Log("rotation = " + rotation);
+    }
 
-        if (fireCountDown <= 0)
+    private void Laser()
+    {
+        if (!lineRenderer.enabled)
         {
-            Shoot();
-            fireCountDown = 1 / fireRate;
+            lineRenderer.enabled = true;
+            impactLight.enabled = false;
+            impactEffect.Play();
         }
-        fireCountDown -= Time.deltaTime;
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, target.position);
+
+        Vector3 dir = firePoint.position - target.position;
+        impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+
+        impactEffect.transform.position = target.position + dir.normalized * 1.5f;
     }
 
     private void Shoot()
