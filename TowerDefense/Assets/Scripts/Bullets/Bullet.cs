@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 
     [Range(0, 100)] public float Speed = 50f;
     [Range(0, 100)] public float explosionRadius = 0f;
+    [Range(0, 10000)] public float damage = 50f;
 
     [Space(25f)]
     [Header("References")]
@@ -54,8 +55,7 @@ public class Bullet : MonoBehaviour
         {
             Damage(target);
         }
-
-        Destroy(target.gameObject);
+        Destroy(gameObject);
     }
 
     private void Explode()
@@ -70,7 +70,16 @@ public class Bullet : MonoBehaviour
 
     private void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        EnnemyController e = enemy.GetComponent<EnnemyController>();
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+            //Debug.Log(damage);
+        }
+        else
+        {
+            Debug.LogError("Pas de script EnnemyController sur l'ennemi !!");
+        }
     }
 
     private void OnDrawGizmosSelected()

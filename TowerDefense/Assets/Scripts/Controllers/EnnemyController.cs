@@ -6,8 +6,10 @@ public class EnnemyController : MonoBehaviour
     [Space(25f)]
     [Header("Enemy stats")]
 
-    [Range(0,100)] public float speed;
-    [Range(0,1)]   public float targetReachedDist;
+    [Range(0,100)]   public float speed;
+    [Range(0,1)]     public float targetReachedDist;
+    [Range(0,50000)] public float health = 100;
+    [Range(0,10000)] public int moneyDrop = 50;
 
     [Space(25f)]
     [Header("Others")]
@@ -19,11 +21,31 @@ public class EnnemyController : MonoBehaviour
     [Header("References")]
 
     public EnnemyData ennemyData;
+    public GameObject deathEffect;
 
 
     private void Start()
     {
         target = Waypoints.points[0];
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+            //Debug.Log(health);
+        }
+    }
+
+    private void Die()
+    {
+        PlayerStats.money += moneyDrop;
+        GameObject deathParticles = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(deathParticles,1f);
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -48,10 +70,17 @@ public class EnnemyController : MonoBehaviour
         //Actualise la target tant que l'ennemi n'est pas arrivé à la fin
         if (waypointIndex >= Waypoints.points.Length - 1)
         {
-            Destroy(gameObject);
+            //L'ennemi arrive à la fin
+            EndPath();
             return;
         }
         waypointIndex++;
         target = Waypoints.points[waypointIndex];
+    }
+
+    private void EndPath()
+    {
+        PlayerStats.lives--;
+        Destroy(gameObject);
     }
 }
