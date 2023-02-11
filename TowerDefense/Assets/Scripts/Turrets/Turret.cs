@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -9,6 +10,8 @@ public class Turret : MonoBehaviour
     public Transform partToRotate;
     public GameObject bulletPrefab;
     public Transform firePoint;
+    [SerializeField] private Transform target;
+    [SerializeField] private EnnemyController targetEnemy;
 
     [Space(25f)]
     [Header("Stats")]
@@ -16,12 +19,13 @@ public class Turret : MonoBehaviour
     [SerializeField] [Range (0, 100)] private float turnSpeed = 10f;
     [SerializeField] [Range (0, 300)] private float fireCountDown = 0f;
     [Range(0, 100)] public float fireRate = 1f;
+    [Range(0, 1)]   public float slowPrcnt = 0.5f;
     [Range(0, 300)] public float range = 15f;
+    [Range(0, 300)] public int damageOverTime = 60;
 
     [Space(25f)]
     [Header("Others")]
 
-    [SerializeField] private Transform target;
     public string enemyTag = "Enemy";
     public bool useLaser;
     public LineRenderer lineRenderer;
@@ -76,18 +80,21 @@ public class Turret : MonoBehaviour
 
     private void Laser()
     {
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowPrcnt);
+
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
             impactLight.enabled = false;
             impactEffect.Play();
         }
+
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
 
         Vector3 dir = firePoint.position - target.position;
         impactEffect.transform.rotation = Quaternion.LookRotation(dir);
-
         impactEffect.transform.position = target.position + dir.normalized * 1.5f;
     }
 
@@ -122,6 +129,7 @@ public class Turret : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = target.GetComponent<EnnemyController>();
             //Debug.Log("new target");
         }
         else

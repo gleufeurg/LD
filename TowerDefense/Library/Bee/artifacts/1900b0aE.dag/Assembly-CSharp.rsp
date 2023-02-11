@@ -355,6 +355,7 @@
 "Assets/Scripts/Controllers/TowerController.cs"
 "Assets/Scripts/Data/EnnemiesData/EnnemyData.cs"
 "Assets/Scripts/Data/TowersData/TowerData.cs"
+"Assets/Scripts/Enemies/EnemyMovement.cs"
 "Assets/Scripts/Level/Node.cs"
 "Assets/Scripts/Level/WaveSpawner.cs"
 "Assets/Scripts/Level/Waypoints.cs"

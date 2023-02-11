@@ -7691,7 +7691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBetweenEnemies: 2
-  timeBetweenWaves: 58.7
+  timeBetweenWaves: 5
   countDown: 2
   waveIndex: 0
   spawnPoint: {fileID: 1613130727}

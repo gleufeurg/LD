@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4221838605950371788}
   - component: {fileID: 4221838605950371779}
   - component: {fileID: 1289807442}
+  - component: {fileID: 6783250640864046770}
   m_Layer: 0
   m_Name: Enemy TEST
   m_TagString: Enemy
@@ -110,11 +111,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c16418baa22fa746a487c451c449fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   targetReachedDist: 0.3
+  speed: 0
+  baseSpeed: 10
   health: 100
   moneyDrop: 50
-  target: {fileID: 0}
-  waypointIndex: 0
   ennemyData: {fileID: 11400000, guid: 84c17d5742fcd9e40aefc602cba3ebec, type: 2}
   deathEffect: {fileID: 2218478177514054272, guid: fe16187f99ecc554db2377ad4052365e, type: 3}
+--- !u!114 &6783250640864046770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4221838605950371778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5158d27575da5b4b92c79f377d25dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  waypointIndex: 0

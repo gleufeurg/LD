@@ -24,6 +24,7 @@ public class BuildManager : MonoBehaviour
 
     public TurretBP turretToBuild;
     public GameObject buildEffect;
+
     public bool canBuild { get { return turretToBuild != null; } }
     public bool hasMoney { get { return PlayerStats.money >= turretToBuild.cost; } }
 
