@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public static int money;
     public static int lives;
+    public static int rounds;
     public int startMoney;
     public int startLives;
 
@@ -13,5 +14,6 @@ public class PlayerStats : MonoBehaviour
     {
         money = startMoney;
         lives = startLives;
+        rounds = 0;
     }
 }

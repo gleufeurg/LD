@@ -362,6 +362,7 @@
 "Assets/Scripts/Managers/BuildManager.cs"
 "Assets/Scripts/Managers/GameManager.cs"
 "Assets/Scripts/PlayerStats.cs"
+"Assets/Scripts/TEST/TEST.cs"
 "Assets/Scripts/Turrets/Turret.cs"
 "Assets/Scripts/Turrets/TurretBP.cs"
 "Assets/Scripts/UI/LivesUI.cs"

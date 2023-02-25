@@ -3,13 +3,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private bool gameEnded = false;
+    public static bool gameIsOver = false;
+    public GameObject gameOverUI;
 
-    // Update is called once per frame
+
+    private void Start()
+    {
+        gameIsOver = false;
+    }
+
     void Update()
     {
-        if (gameEnded)
+        /*if(Input.GetKeyDown(KeyCode.L))
+        { 
+            EndGame();
+        }*/
+
+        if (gameIsOver)
             return;
+
         if (PlayerStats.lives <= 0)
         {
             EndGame();
@@ -18,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        gameEnded= true;
-        Debug.Log("You dead");
+        gameIsOver= true;
+        gameOverUI.SetActive(true);
+        //Debug.Log("You dead");
     }
 }

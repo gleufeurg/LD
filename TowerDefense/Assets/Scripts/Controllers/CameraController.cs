@@ -25,7 +25,13 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(GameManager.gameIsOver)
+        {
+            this.enabled = false;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             canMove = !canMove;
         }
